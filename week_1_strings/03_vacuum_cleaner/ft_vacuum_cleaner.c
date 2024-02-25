@@ -6,7 +6,7 @@
 /*   By: darkwater <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 01:49:54 by darkwater         #+#    #+#             */
-/*   Updated: 2023/06/17 02:34:52 by darkwater        ###   ########.fr       */
+/*   Updated: 2024/02/25 15:46:01 by lstephen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_vertical(char *str, int i)
 	{
 		return (1);
 	}
-}	
+}
 
 int	check_horizontal(char *str, int i)
 {
