@@ -6,7 +6,7 @@
 /*   By: darkwater <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:06:07 by darkwater         #+#    #+#             */
-/*   Updated: 2024/03/04 01:13:36 by darkwater        ###   ########.fr       */
+/*   Updated: 2024/03/04 01:17:30 by darkwater        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,27 +120,30 @@ int	main(void)
 
 	result = ft_merge_lists(list1, list2);
 	head = result;
-	while (result != NULL)
+	while (result->next != NULL)
 	{
-		printf("%d\n", result->content);
+		printf("%d->", result->content);
 		result = result->next;
 	}
+	printf("%d->NULL\n", result->content);
 	free_list(head);
 	result = ft_merge_lists(list3, list4);
 	head = result;
-	while (result != NULL)
+	while (result->next != NULL)
 	{
-		printf("%d\n", result->content);
+		printf("%d->", result->content);
 		result = result->next;
 	}
+	printf("%d->NULL\n", result->content);
 	free_list(head);
 	result = ft_merge_lists(list5, list6);
 	head = result;
-	while (result != NULL)
+	while (result->next != NULL)
 	{
-		printf("%d\n", result->content);
+		printf("%d->", result->content);
 		result = result->next;
 	}
+	printf("%d->NULL\n", result->content);
 	free_list(head);
 	return (0);
 }
