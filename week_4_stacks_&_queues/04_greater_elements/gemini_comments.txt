@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 50  // Define maximum stack size
+
+// Function to find next greater elements for each element in nums1 within nums2
+int* ft_greater_elements(int* nums1, int nums1Len, int* nums2, int nums2Len) {
+  // Allocate memory for result array to store next greater elements
+  int *res = (int*)malloc(sizeof(int) * nums1Len);
+  if (res == NULL)
+    return NULL;
+
+  // Initialize all elements in result array to -1 (no next greater element found yet)
+  for (int i = 0; i < nums1Len; i++)
+    res[i] = -1;
+
+  // Stack to store potential next greater elements encountered while processing nums2
+  int stack[MAX_SIZE];
+  int top = -1;  // Initialize stack top pointer
+
+  // Map to store the index in nums1 for each element in nums2 (if it exists)
+  int map[nums2Len];
+
+  // Initialize all elements in map to -1 (no mapping yet)
+  for (int i = 0; i < nums2Len; i++) {
+    map[i] = -1;
+  }
+
+  // Create a mapping from elements in nums1 to their corresponding indices in nums1
+  for (int i = 0; i < nums1Len; i++) {
+    for (int j = 0; j < nums2Len; j++) {
+      if (nums1[i] == nums2[j]) {  // Check if element from nums1 is found in nums2
+        map[j] = i;               // Store the index of element in nums1 in the map
+        break;                    // Exit inner loop after finding the element
+      }
+    }
+  }
+
+  // Variable to keep track of elements pushed onto the stack since the last update to res
+  int count = 0;
+
+  // Process elements in nums2 from left to right
+  for (int i = 0; i < nums2Len; i++) {
+    // Check if stack is not empty and current element is greater than the top element
+    if (top != -1 && nums2[i] > stack[top]) {
+      // While the current element is greater than elements on the stack...
+      while (top != -1 && nums2[i] > stack[top]) {
+        // Check if the popped element has a corresponding element in nums1 (using the map)
+        if (i > 0 && map[i - count] != -1) {
+          // Update the result array at the correct index retrieved from the map
+          res[map[i-- - count]] = nums2[i];
+          // Reset count to 0 as the next greater element has been found
+          count = 0;
+        }
+        top--;  // Pop element from the stack
+      }
+    } else {
+      // If current element is not greater than the top element or stack is empty
+      count++;  // Increment count as this element might be the next greater for previous elements
+      stack[++top] = nums2[i];  // Push current element onto the stack
+    }
+  }
+
+  return res;  // Return the result array containing next greater elements
+}
+
+int main(void) {
+  // ... your code using ft_greater_elements ...
+  return 0;
+}
+

@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 50
+
+int* ft_greater_elements(int* nums1, int nums1Len, int* nums2, int nums2Len) {
+  // Allocate memory for result array to store next greater elements
+  int *res = (int*)malloc(sizeof(int) * nums1Len);
+  if (res == NULL)
+    return NULL;
+
+  // Initialize all elements in result array to -1 (no next greater element found yet)
+  for (int i = 0; i < nums1Len; i++)
+    res[i] = -1;
+
+  // Stack to store potential next greater elements encountered while processing nums2
+  int stack[MAX_SIZE];
+  int top = -1;  // Initialize stack top pointer
+
+  // Map to store the index in nums1 for each element in nums2 (if it exists)
+  int map[nums2Len];
+
+  // Initialize all elements in map to -1 (no mapping yet)
+  for (int i = 0; i < nums2Len; i++) {
+    map[i] = -1;
+  }
+
+  // Pre-processing: Create a mapping from elements in nums1 to their corresponding indices in nums1 (O(n^2) worst-case time complexity)
+  for (int i = 0; i < nums1Len; i++) {
+    for (int j = 0; j < nums2Len; j++) {
+      if (nums1[i] == nums2[j]) {  // Check if element from nums1 is found in nums2
+        map[j] = i;               // Store the index of element in nums1 in the map
+        break;                    // Exit inner loop after finding the element
+      }
+    }
+  }
+
+  // Processing: Find next greater elements for each element in nums1 within nums2 (uses the created map)
+  int count = 0;
+
+  // ... rest of your code for processing elements in nums2 and updating result array ...
+
+  return res;
+}
+
+int main(void) {
+  // ... your code using ft_greater_elements ...
+  return 0;
+}
+
