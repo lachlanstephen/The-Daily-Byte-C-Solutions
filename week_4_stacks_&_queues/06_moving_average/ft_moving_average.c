@@ -6,7 +6,7 @@
 /*   By: darkwater <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 01:37:19 by darkwater         #+#    #+#             */
-/*   Updated: 2024/03/16 01:50:47 by darkwater        ###   ########.fr       */
+/*   Updated: 2024/03/17 02:21:56 by darkwater        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	g_nums[100];
-int			g_cap;
+int	g_cap;
 
-void	pop_val(int	*count)
+void	pop_val(int	*count, int *nums_q)
 {
 	int	i;
 
@@ -25,8 +24,8 @@ void	pop_val(int	*count)
 	if (*count > 0)
 	{
 		while (++i < *count - 1)
-			g_nums[i] = g_nums[i + 1];
-		g_nums[i] = 0;
+			nums_q[i] = nums_q[i + 1];
+		nums_q[i] = 0;
 		(*count)--;
 	}
 }
@@ -35,15 +34,16 @@ int	moving_average(int num)
 {
 	int			i;
 	static int	count;
+	static int	nums_q[100];
 	int			res;
 
 	i = -1;
 	res = 0;
-	g_nums[count++] = num;
+	nums_q[count++] = num;
 	while (count > g_cap)
-		pop_val(&count);
+		pop_val(&count, nums_q);
 	while (++i < count)
-		res += g_nums[i];
+		res += nums_q[i];
 	res /= count;
 	return (res);
 }
