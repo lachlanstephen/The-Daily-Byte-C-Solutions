@@ -6,7 +6,7 @@
 /*   By: lstephen <lstephen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 21:49:30 by lstephen          #+#    #+#             */
-/*   Updated: 2024/03/16 01:35:34 by darkwater        ###   ########.fr       */
+/*   Updated: 2024/03/17 02:28:43 by darkwater        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ typedef struct
 */
 
 static int	g_count;
-static int	g_calls[100];
 
-void	pop_val(void)
+void	pop_val(int *calls)
 {
 	int	i;
 
@@ -32,21 +31,23 @@ void	pop_val(void)
 	if (g_count > 0)
 	{
 		while (++i < g_count - 1)
-			g_calls[i] = g_calls[i + 1];
-		g_calls[i] = 0;
+			calls[i] = calls[i + 1];
+		calls[i] = 0;
 		g_count--;
 	}
 }
 
 int	ping(int t)
 {
+	static int	calls[100];
+
 	if (g_count >= 100)
 		exit(1);
-	g_calls[g_count++] = t;
+	calls[g_count++] = t;
 	while (g_count > 0)
 	{
-		if (t - 3000 > g_calls[0])
-			pop_val();
+		if (t - 3000 > calls[0])
+			pop_val(calls);
 		else
 			break ;
 	}
