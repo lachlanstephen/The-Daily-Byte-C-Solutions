@@ -9,3 +9,25 @@ m.next(3) returns 3 because (3 / 1) = 3
 m.next(5) returns 4 because (3 + 5) / 2 = 4 
 m.next(7) = returns 5 because (3 + 5 + 7) / 3 = 5
 m.next(6) = returns 6 because (5 + 7 + 6) / 3 = 6
+
+MovingAverage class definition:
+
+public class MovingAverage {
+    // TODO: declare any instance variables you require.
+/**
+ * Initializes a MovingAverage with a
+ * capacity of `size`.
+ */
+public MovingAverage(int size) {
+  // TODO: initialize your MovingAverage.
+}
+
+/**
+ * Adds `val` to the stream of numbers
+ * and returns the current average of the numbers.
+ */
+public double next(int val) {
+   // TODO: implement this method.
+}
+
+}
